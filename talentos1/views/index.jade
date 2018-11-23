@@ -1,0 +1,100 @@
+extends layout
+
+block content
+  h1 Sistema de Control de Camping
+
+  // Wrapper
+  #wrapper
+
+    // CAMPING
+    h2 Camping Disponible
+    #campingdisp
+      p camping:
+    // /CAMPING
+
+    // USER INFO
+    #userInfo
+      h2 Información
+      p
+        strong Nombre:
+        |  <span id='userInfoName'></span>
+        br
+        strong Edad:
+        |  <span id='userInfoAge'></span>
+        br
+        strong Sexo:
+        |  <span id='userInfoGender'></span>
+        br
+        strong País:
+        |  <span id='userInfoLocation'></span>
+        <br>
+        strong Camping:
+        |  <span id='userInfoCamping'></span>
+    // /USER INFO
+
+    // USER LIST
+    h2 Lista de Usuarios
+    #userList
+      table
+        thead
+          th Nombre
+          th Email
+          th CampingAsignado
+          th Borrar?
+          th AsignarCamping
+          th Compartir
+          th QuitarCamping
+        tbody
+    // /USER LIST
+
+    // COMPARTIR CAMPING INDIVIDUAL
+    h2 Asignar Individual
+    #campingcompindv
+      fieldset
+        p#pcompart1
+        br
+        input#inputcasaindv(type='number' placeholder='Casa de campaña')
+        br
+        button#btnVincin Asignar
+        button#btnResin RESET
+    // /COMPARTIR CAMPING INDIVIDUAL
+
+    // COMPARTIR CAMPING
+    h2 Compartir Camping
+    #campingConpart
+      fieldset
+        p#per1
+        br
+        p#per2
+        br
+        input#inputcasamanual(type='number' placeholder='Casa de campaña manual (opcional)')
+        br
+        button#btnVincular Vincular
+        button#btnReset RESET
+    // /COMPARTIR CAMPING
+
+    // ADD USER
+    h2 Agregar Usuario
+    #addUser
+      fieldset
+        input#inputUserEmail(type='text', placeholder='Email')
+        br
+        input#inputUserFullname(type='text', placeholder='Nombre')
+        input#inputUserAge(type='text', placeholder='Edad')
+        br
+        input#inputUserLocation(type='text', placeholder='País')
+        input#inputUserGender(type='text', placeholder='Sexo')
+        br
+        button#btnAddUser Agregar
+    // /ADD USER
+
+    // ADD CASITAS
+    h2 Agregar Casitas
+    #addCasitas
+      fieldset
+        input#inputnumbercasitas(type="number",placeholder="Numero de casitas")
+        input#inputZona(type="text",placeholder="Zona")
+        br
+        button#btnAddCasita Agregar
+    // /ADD CASITAS  
+  // /WRAPPER
