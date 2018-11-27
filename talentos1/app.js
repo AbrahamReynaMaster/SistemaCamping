@@ -8,7 +8,9 @@ var logger = require('morgan');
 // Database
 var mongo = require('mongodb');
 var monk = require('monk');
-var db = monk('localhost:27017/camping-cf');
+//localhost
+//var db = monk('localhost:27017/camping-cf');
+var db = monk('mongodb://campingdb:xpBBer6b2p5XVjMxfXDd5CDh35ujSzA8OwRVvvp7OJxWFzxROcjWuOuuYRtC94jmTLEWUXXO8hEA77I20fXoDQ%3D%3D@campingdb.documents.azure.com:10255/?ssl=true');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
