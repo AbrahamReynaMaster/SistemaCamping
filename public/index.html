@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/buefy/dist/buefy.min.css">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+</head>
+
+<body>
+    <div id="app" class="container">
+    
+        <section>
+            <b-field grouped group-multiline>
+                <div class="control">
+    <b-switch v-model="isBordered">Bordered</b-switch>
+                </div>
+                <div class="control">
+    <b-switch v-model="isStriped">Striped</b-switch>
+                </div>
+                <div class="control">
+    <b-switch v-model="isNarrowed">Narrowed</b-switch>
+                </div>
+                <div class="control">
+    <b-switch v-model="isHoverable">Hoverable</b-switch>
+                </div>
+                <div class="control">
+    <b-switch v-model="isFocusable">Focusable</b-switch>
+                </div>
+                <div class="control">
+    <b-switch v-model="isLoading">Loading state</b-switch>
+                </div>
+                <div class="control">
+    <b-switch v-model="isEmpty">Empty</b-switch>
+                </div>
+                <div class="control">
+    <b-switch v-model="hasMobileCards">Mobile cards <small>(collapsed rows)</small></b-switch>
+                </div>
+            </b-field>
+    
+            <b-table
+                :data="isEmpty ? [] : info"
+                :bordered="isBordered"
+                :striped="isStriped"
+                :narrowed="isNarrowed"
+                :hoverable="isHoverable"
+                :loading="isLoading"
+                :focusable="isFocusable"
+                :mobile-cards="hasMobileCards">
+    
+    <template slot-scope="props">
+            <b-table-column field="id" label="ID" width="40" numeric>
+                {{ props.row._id }}
+            </b-table-column>
+            
+            <b-table-column field="first_name" label="Nombre">
+                {{ props.row.name }}
+            </b-table-column>
+            
+            <b-table-column field="last_name" label="Apellido">
+                {{ props.row.last_name }}
+            </b-table-column>
+            
+            <b-table-column field="date" label="Código" centered>
+                <span class="tag is-success">
+                    {{ props.row.codes_id }}
+                </span>
+            </b-table-column>
+
+            <b-table-column label="Casa asignada">
+                <b-icon pack="fas"
+                    :icon="props.row.houses_id === 0 ? 'campground' : 'venus'">
+                </b-icon>
+                {{ props.row.houses_id }}
+            </b-table-column>
+    </template>
+    
+                <template slot="empty">
+    <section class="section">
+        <div class="content has-text-grey has-text-centered">
+            <p>
+                <b-icon
+                    icon="emoticon-sad"
+                    size="is-large">
+                </b-icon>
+            </p>
+            <p>Nothing here.</p>
+        </div>
+    </section>
+                </template>
+            </b-table>
+        </section>
+    
+    </div>    
+
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- Full bundle -->
+    <script src="https://unpkg.com/buefy/dist/buefy.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.4/lodash.min.js"></script>
+    <script src="https://unpkg.com/cleave.js/dist/cleave.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.6.1/Sortable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vee-validate@2.1.0-beta.9/dist/vee-validate.min.js"></script>
+
+    <!-- Individual components -->
+    <script src="https://unpkg.com/buefy/dist/components/table"></script>
+    <script src="https://unpkg.com/buefy/dist/components/input"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data(){
+                return{
+                    info: [],
+                    errored: false,
+                    loading: false,
+                    isEmpty: false,
+                    isBordered: true,
+                    isStriped: false,
+                    isNarrowed: false,
+                    isHoverable: false,
+                    isFocusable: false,
+                    isLoading: true,
+                    hasMobileCards: true
+                }
+            },
+            beforeMount () {
+                axios
+                    //.get('http://jsonplaceholder.typicode.com/todos/',{
+                    .get('/getUsersCamping',{
+                })
+                .then(response => {
+                    this.info = response.data
+                    console.log(this.info);
+                })
+                .catch(error => {
+                    console.log(error)
+                    //this.errored = true
+                })
+                .finally(() => this.isLoading = false)
+                },
+        })
+        
+    </script>
+    <script>
+    </script>
+</body>
+</html>

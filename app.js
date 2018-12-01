@@ -9,17 +9,17 @@ var logger = require('morgan');
 var mongo = require('mongodb');
 var monk = require('monk');
 //localhost
-//var db = monk('localhost:27017/camping-cf');
-var db = monk('mongodb://campingdb:xpBBer6b2p5XVjMxfXDd5CDh35ujSzA8OwRVvvp7OJxWFzxROcjWuOuuYRtC94jmTLEWUXXO8hEA77I20fXoDQ%3D%3D@campingdb.documents.azure.com:10255/?ssl=true');
+var db = monk('localhost:27017/talent_camping');
+//var db = monk('mongodb://campingdb:xpBBer6b2p5XVjMxfXDd5CDh35ujSzA8OwRVvvp7OJxWFzxROcjWuOuuYRtC94jmTLEWUXXO8hEA77I20fXoDQ%3D%3D@campingdb.documents.azure.com:10255/?ssl=true');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+//var usersRouter = require('./routes/users');
 
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+//app.set('views', path.join(__dirname, 'views'));
+//app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -34,7 +34,7 @@ app.use(function(req,res,next){
 });
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+//app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
