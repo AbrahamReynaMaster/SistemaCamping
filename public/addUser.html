@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/buefy/dist/buefy.min.css">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+</head>
+
+<body>
+    <div id="app" class="container">
+    
+        <section>
+            <b-field label="Name">
+                <b-input aria-placeholder="Hola"></b-input>
+            </b-field>
+
+    
+            <b-field label="Email"
+                type="is-danger"
+                message="This email is invalid">
+                <b-input type="email" value="john@" maxlength="30">
+                </b-input>
+            </b-field>
+    
+            <b-field label="Username"
+                type="is-success"
+                message="This username is available">
+                <b-input value="johnsilver" maxlength="30"></b-input>
+            </b-field>
+    
+            <b-field label="Password"
+                type="is-warning"
+                :message="['Password is too short', 'Password must have at least 8 characters']">
+                <b-input value="123" type="password" maxlength="30"></b-input>
+            </b-field>
+    
+            <b-field label="Subject">
+                <b-select placeholder="Select a subject">
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                </b-select>
+            </b-field>
+        </section>
+    </div>        
+
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- Full bundle -->
+    <script src="https://unpkg.com/buefy/dist/buefy.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.4/lodash.min.js"></script>
+    <script src="https://unpkg.com/cleave.js/dist/cleave.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.6.1/Sortable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vee-validate@2.1.0-beta.9/dist/vee-validate.min.js"></script>
+
+    <!-- Individual components -->
+    <script src="https://unpkg.com/buefy/dist/components/table"></script>
+    <script src="https://unpkg.com/buefy/dist/components/input"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data(){
+                return{
+                    
+                }
+            },
+            mounted () {
+            },
+        })
+        
+    </script>
+</body>
+</html>
