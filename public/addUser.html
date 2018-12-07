@@ -12,18 +12,55 @@
     <div id="app" class="container">
     
         <section>
-            <b-field label="Name">
-                <b-input aria-placeholder="Hola"></b-input>
+            <b-field label="Nombre(s)">
+                <b-input ref="names" placeholder="Max" required pattern="[a-zA-Z ]{2,200}" title="Solo letras"></b-input>
             </b-field>
 
-    
+            <b-field label="Apellidos">
+                <b-input ref="last_name" placeholder="Gutierrez" required pattern="[a-zA-Z ]{2,200}" title="Solo letras"></b-input>
+            </b-field>
+
+            <b-field label="email">
+                <b-input ref="email" type="email" placeholder="abraham.reyna@talent-network.org" required></b-input>
+            </b-field>
+
+            <b-field label="Edad">
+                <b-input ref="age" type="number" max="100" placeholder="22" required></b-input>
+            </b-field>
+
+            <b-field label="Telefono">
+                <b-input ref="tel" type="tel" placeholder="5566881199" pattern="[0-9]{10}" required></b-input>
+            </b-field>
+
+            <b-field><!-- Label left empty for spacing -->
+                <p class="control" >
+                    <button v-on:click="addUser" class="button is-primary">
+                      Agregar Usuario
+                    </button>
+                </p>
+            </b-field>
+            <b-field>
+                <p class="control" >
+                    <button class="button is-success">
+                      Asignar Camping
+                    </button>
+                </p>
+            </b-field>
+            <b-field>
+                <p class="control" >
+                    <button class="button is-info">
+                      Vincular a Camping
+                    </button>
+                </p>
+            </b-field>
+            <!--
             <b-field label="Email"
-                type="is-danger"
+                type="is-danger" type="is-sucess" type="is-warning"
                 message="This email is invalid">
                 <b-input type="email" value="john@" maxlength="30">
                 </b-input>
             </b-field>
-    
+            
             <b-field label="Username"
                 type="is-success"
                 message="This username is available">
@@ -42,6 +79,7 @@
                     <option value="2">Option 2</option>
                 </b-select>
             </b-field>
+            -->
         </section>
     </div>        
 
@@ -65,11 +103,48 @@
             el: '#app',
             data(){
                 return{
-                    
+                   hasError : false,
+                   isLoading : false 
                 }
             },
-            mounted () {
-            },
+            methods: {
+                addUser : function (event) {
+                    this.isLoading = true
+                    axios.post('/addUserSimple',{
+                        name: this.$refs.names.$refs["input"].value,
+                        last_name: this.$refs.last_name.$refs["input"].value,
+                        age: this.$refs.age.$refs["input"].value,
+                        tel: this.$refs.tel.$refs["input"].value,
+                        email: this.$refs.email.$refs["input"].value
+                    })
+                    .then(res => {
+                        if(res.data.msg == 1){
+                            alert("El usuario ya existe, verficar los datos");
+                        }
+                        else if(res.data.msg == 2){
+                            alert("El usuario se agregó correctamente");
+                        }
+                        else{
+                            alert("Error en: "+res.data.msg);
+                        }
+                        console.log("Respuesta: "+res.data)
+                    })
+                    .catch(error => {
+                        this.hasError = true
+                        console.log("Algo salio mal: "+error)
+                    })
+                    .finally(() => this.isLoading = false);
+                },
+
+                AddWithCamping : function (event){
+
+                },
+
+                VinculateUser : function(event){
+
+                }
+
+            }
         })
         
     </script>
