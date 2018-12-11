@@ -32,6 +32,10 @@
                 <b-input ref="tel" type="tel" placeholder="5566881199" pattern="[0-9]{10}" required></b-input>
             </b-field>
 
+            <b-field custom-class="isHidden" label="Codigo Camping">
+                <b-field  ref="code" type="text" placeholder=""></b-field>
+            </b-field>
+
             <b-field><!-- Label left empty for spacing -->
                 <p class="control" >
                     <button v-on:click="addUser" class="button is-primary">
@@ -43,6 +47,11 @@
                 <p class="control" >
                     <button class="button is-success">
                       Asignar Camping
+                    </button>
+                </p>
+                <p class="control" >
+                    <button class="button is-success">
+                      Enviar
                     </button>
                 </p>
             </b-field>
@@ -104,7 +113,7 @@
             data(){
                 return{
                    hasError : false,
-                   isLoading : false 
+                   isLoading : false, 
                 }
             },
             methods: {
@@ -118,10 +127,10 @@
                         email: this.$refs.email.$refs["input"].value
                     })
                     .then(res => {
-                        if(res.data.msg == 1){
+                        if(res.data.msg == "user_exist_in_database"){
                             alert("El usuario ya existe, verficar los datos");
                         }
-                        else if(res.data.msg == 2){
+                        else if(res.data.msg == "user_added"){
                             alert("El usuario se agregó correctamente");
                         }
                         else{
@@ -137,7 +146,6 @@
                 },
 
                 AddWithCamping : function (event){
-
                 },
 
                 VinculateUser : function(event){
